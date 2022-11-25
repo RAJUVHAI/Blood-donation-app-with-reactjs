@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {auth,provider } from "./config";
+import {auth,gooprovider } from "./config";
 import { signInWithPopup } from "firebase/auth";
 import Footer from "../../Layouts/Frontend/Footer";
 import Navbar from "../../Layouts/Frontend/Navbar";
 import Home from "../Home";
 
 export default function Signin() {
-     const [value,setValue] =useState("")
+     const [goovalue,setgooValue] =useState("")
      const [email , setEmail] = useState("");
      const [password , setPassword] = useState("");
-     const handleClick = ()=>{
-        signInWithPopup(auth,provider).then((data)=>{
-            setValue(data.user.email);
+     const GooglehandleClick = ()=>{
+        signInWithPopup(auth,gooprovider).then((data)=>{
+            setgooValue(data.user.email);
             localStorage.setItem("email",data.user.email)
         })
         
@@ -23,11 +23,11 @@ export default function Signin() {
 
 
  useEffect(()=>{
-    setValue(localStorage.getItem('email'))
+    setgooValue(localStorage.getItem('email'))
  })
   return (
     <div>
-      {value ? (
+      {goovalue ? (
         <Home />
       ) : (
         <>
@@ -49,7 +49,7 @@ export default function Signin() {
                       <p className="text-lg mb-0 mr-4">Sign in with</p>
                       <button
                         type="button"
-                        onClick={handleClick}
+                        onClick={GooglehandleClick}
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
                         className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
