@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {auth,gooprovider } from "./config";
+import {auth,gooprovider,gitprovider } from "./config";
 import { signInWithPopup } from "firebase/auth";
 import Footer from "../../Layouts/Frontend/Footer";
 import Navbar from "../../Layouts/Frontend/Navbar";
@@ -8,8 +8,10 @@ import Home from "../Home";
 
 export default function Signin() {
      const [goovalue,setgooValue] =useState("")
+       const [gitvalue, setgitValue] = useState("");
      const [email , setEmail] = useState("");
      const [password , setPassword] = useState("");
+    //google auth
      const GooglehandleClick = ()=>{
         signInWithPopup(auth,gooprovider).then((data)=>{
             setgooValue(data.user.email);
@@ -17,17 +19,25 @@ export default function Signin() {
         })
         
     }
+    //github auth
+     const GithandleClick = () => {
+       signInWithPopup(auth, gitprovider).then((data) => {
+         setgitValue(data.user.email);
+         localStorage.setItem("email", data.user.email);
+       });
+     };
     const handleSubmit= ()=>{
 
     }
 
 
- useEffect(()=>{
-    setgooValue(localStorage.getItem('email'))
- })
+ useEffect(() => {
+   setgooValue(localStorage.getItem("email"));
+   setgitValue(localStorage.getItem("email"));
+ }, []);
   return (
     <div>
-      {goovalue ? (
+      {goovalue || gitvalue ? (
         <Home />
       ) : (
         <>
@@ -52,59 +62,44 @@ export default function Signin() {
                         onClick={GooglehandleClick}
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
-                        className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
+                        className="inline-block p-3 bg-white-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-white-700 hover:shadow-lg focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                       >
-                        {/* Facebook */}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 320 512"
-                          className="w-4 h-4"
-                        >
-                          {/*! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. */}
+                        {/* google */}
+                        <svg className="w-4" viewBox="0 0 533.5 544.3">
                           <path
-                            fill="currentColor"
-                            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                            d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
+                            fill="#4285f4"
+                          />
+                          <path
+                            d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"
+                            fill="#34a853"
+                          />
+                          <path
+                            d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"
+                            fill="#fbbc04"
+                          />
+                          <path
+                            d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
+                            fill="#ea4335"
                           />
                         </svg>
                       </button>
                       <button
                         type="button"
+                        onClick={GithandleClick}
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
-                        className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
+                        className="inline-block p-3 bg-white-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-white-700 hover:shadow-lg focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                       >
-                        {/* Twitter */}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                          className="w-4 h-4"
-                        >
-                          {/*! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. */}
+                        {/* github */}
+                        <svg className="w-5" viewBox="0 0 32 32">
                           <path
-                            fill="currentColor"
-                            d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                            fillRule="evenodd"
+                            d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387.602.11.82-.258.82-.578 0-.286-.011-1.04-.015-2.04-3.34.723-4.043-1.609-4.043-1.609-.547-1.387-1.332-1.758-1.332-1.758-1.09-.742.082-.726.082-.726 1.203.086 1.836 1.234 1.836 1.234 1.07 1.836 2.808 1.305 3.492 1 .11-.777.422-1.305.762-1.605-2.664-.301-5.465-1.332-5.465-5.93 0-1.313.469-2.383 1.234-3.223-.121-.3-.535-1.523.117-3.175 0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0116 9.805c1.02.004 2.047.136 3.004.402 2.293-1.55 3.297-1.23 3.297-1.23.656 1.652.246 2.875.12 3.175.77.84 1.231 1.91 1.231 3.223 0 4.61-2.804 5.621-5.476 5.922.43.367.812 1.101.812 2.219 0 1.605-.011 2.898-.011 3.293 0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z"
                           />
                         </svg>
                       </button>
-                      <button
-                        type="button"
-                        data-mdb-ripple="true"
-                        data-mdb-ripple-color="light"
-                        className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
-                      >
-                        {/* Linkedin */}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 448 512"
-                          className="w-4 h-4"
-                        >
-                          {/*! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. */}
-                          <path
-                            fill="currentColor"
-                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
-                          />
-                        </svg>
-                      </button>
+                   
                     </div>
                     <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                       <p className="text-center font-semibold mx-4 mb-0">Or</p>
@@ -161,14 +156,12 @@ export default function Signin() {
                       </button>
                       <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                         Don't have an account?
-                        <Link to="/signup">
-                          {" "}
-                          <a
+                        <Link to="/signup"
                             href="#!"
                             className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
                           >
                             Register
-                          </a>
+                          
                         </Link>
                       </p>
                     </div>
