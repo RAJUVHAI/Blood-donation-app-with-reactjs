@@ -50,12 +50,12 @@ export default function Signin() {
                     alt="not show"
                   />
                 </div>
-                <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+                <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0  ">
                   <Formik
                     initialValues={{ email: "", password: "" }}
                     validate={(values) => {
                       const errors = {};
-                      if (!values.email ) {
+                      if (!values.email) {
                         errors.email = " Email is Required!";
                       } else if (
                         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
@@ -64,13 +64,13 @@ export default function Signin() {
                       ) {
                         errors.email = "Invalid email address";
                       }
-                         if (!values.password) {
-                           errors.password  = " Password is Required!";
-                         } else {
-                           if(values.password.length < 8){
-                             errors.password = " Password is must 8 character "
-                           }
-                         }
+                      if (!values.password) {
+                        errors.password = " Password is Required!";
+                      } else {
+                        if (values.password.length < 8) {
+                          errors.password = " Password is must 8 character ";
+                        }
+                      }
                       return errors;
                     }}
                     onSubmit={(values, { setSubmitting }) => {

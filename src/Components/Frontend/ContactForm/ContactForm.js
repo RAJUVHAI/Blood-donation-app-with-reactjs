@@ -2,16 +2,18 @@ import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 function ContactForm() {
-  const form = useRef();
+ const form = useRef();
  const Swal = require("sweetalert2");
  const [name, setName] = useState('');
  const [email, setEmail] = useState('');
  const [message, setMessage] = useState("");
+
   const sendEmail = (e) => {
     e.preventDefault();
         setName("")
         setEmail("")
         setMessage("")
+        
    Swal.fire("Success!", "Message sent.you'll feedback soon !", "success");
     emailjs
       .sendForm(
@@ -30,7 +32,7 @@ function ContactForm() {
       );
   };
   return (
-    <div>
+    <div id="Contact">
       <div className=" px-8  bg-gray-100 ">
         <div className="max-w-screen-xl  px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg ">
           <div className="flex flex-col justify-between">
@@ -1012,9 +1014,11 @@ function ContactForm() {
                   type="text"
                   name="user_name"
                   value={name}
-            
-                  onChange = {(e) => setName(e.target.value)}>
+                  
+                  onChange = {(e) => setName(e.target.value)}
+                  required >
                 </input>
+               
               </div>
               <div className="mt-8">
                 <span className="uppercase text-sm text-gray-600 font-bold">
@@ -1026,7 +1030,7 @@ function ContactForm() {
                   name="user_email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                ></input>
+                required></input>
               </div>
               <div className="mt-8">
                 <span className="uppercase text-sm text-gray-600 font-bold">
@@ -1037,7 +1041,7 @@ function ContactForm() {
                   name="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                ></textarea>
+                required></textarea>
               </div>
               <div className="mt-8">
                 <button

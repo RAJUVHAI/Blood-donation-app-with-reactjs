@@ -30,7 +30,7 @@ const Navbar = () => {
               className="menu  dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a href="#hel">
+                <Link to="/">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 "
@@ -46,10 +46,10 @@ const Navbar = () => {
                     />
                   </svg>
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#hel">
+                    <Link to="/doners">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -65,10 +65,10 @@ const Navbar = () => {
                     />
                   </svg>
                   Doners list
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#hel">
+                <a href="#Services">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -125,7 +125,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li>
-                <a href="#hel">
+                <a href="#Contact">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"

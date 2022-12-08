@@ -5,7 +5,7 @@ function Testimonials() {
     <div>
       <section className="mb-20 px-10 text-gray-700">
         <div className="text-center md:max-w-xl lg:max-w-3xl mx-auto">
-          <div className="divider pt-5">
+        <div  className="divider pt-5">
             <h3 className="text-3xl font-bold mb-2 text-gray-800">
               উপদেষ্টা মন্ডলী
             </h3>
